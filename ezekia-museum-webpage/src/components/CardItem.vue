@@ -4,10 +4,10 @@
       <slot name="image"></slot>
     </div>
     <div class="card__info">
-      <h3>
+      <h3 class="card__heading">
         <slot name="heading"></slot>
       </h3>
-      <p>
+      <p class="card__details">
         <slot name="details"></slot>
       </p>
     </div>
@@ -16,18 +16,36 @@
 
 <style lang="scss" scoped>
 .card {
-  margin-top: 2rem;
-  display: flex;
+  border-radius: 20px;
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
   &__image {
-    width: 200px;
-    height: 200px;
     overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
   }
-}
+  &__info {
+    display: flex;
+    flex-flow: column;
+    flex: 1;
+    position: absolute;
+  }
+  &__heading {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    background: var(--c-bg-card-header);
+    opacity: 0.7;
 
-.card__info {
-  flex: 1;
-  margin-left: 1rem;
+    padding: 0 20px;
+    width: 100%;
+    height: 50px;
+  }
+  &__details {
+    padding: 0 20px;
+  }
 }
 
 i {
@@ -37,14 +55,14 @@ i {
   width: 32px;
   height: 32px;
 
-  color: var(--color-text);
+  color: var(--c-text);
 }
 
 h3 {
   font-size: 1.2rem;
   font-weight: 500;
   margin-bottom: 0.4rem;
-  color: var(--color-heading);
+  color: var(--c-heading);
 }
 
 @media (min-width: 1024px) {
@@ -57,8 +75,8 @@ h3 {
     top: calc(50% - 25px);
     left: -26px;
     position: absolute;
-    border: 1px solid var(--color-border);
-    background: var(--color-background);
+    border: 1px solid var(--c-border);
+    background: var(--c-bg);
     border-radius: 8px;
     width: 50px;
     height: 50px;
@@ -66,7 +84,7 @@ h3 {
 
   .item:before {
     content: ' ';
-    border-left: 1px solid var(--color-border);
+    border-left: 1px solid var(--c-border);
     position: absolute;
     left: 0;
     bottom: calc(50% + 25px);
@@ -75,7 +93,7 @@ h3 {
 
   .item:after {
     content: ' ';
-    border-left: 1px solid var(--color-border);
+    border-left: 1px solid var(--c-border);
     position: absolute;
     left: 0;
     top: calc(50% + 25px);
