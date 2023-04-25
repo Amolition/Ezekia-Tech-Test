@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, watchEffect } from 'vue'
 import TheHeader from './components/TheHeader.vue'
 import TheBody from './components/TheBody.vue'
 
@@ -56,15 +57,41 @@ const rawData = {
     },
   },
 } as const
+
+const isClientDarkMode = () => {
+  return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+}
+
+const setDarkTheme = (bool: boolean) => {
+  if (bool) document.body.classList.add('dark-mode')
+  else document.body.classList.remove('dark-mode')
+}
+
+const darkThemeState = ref(isClientDarkMode())
+watchEffect(() => setDarkTheme(darkThemeState.value))
 </script>
 
 <template>
-  <header class="header">
-    <TheHeader />
+  <header class="header" @toggle-dark-mode="setDarkTheme">
+    <TheHeader :dark-mode-sate="true">
+      <template #darkThemeToggle>
+        <div class="dark-mode-toggle-container">
+          <font-awesome-icon class="dark-mode-toggle__off-icon" :icon="['fas', 'sun']" />
+          <button
+            class="dark-mode-toggle"
+            :class="darkThemeState ? 'dark-mode-toggle--on' : 'dark-mode-toggle--off'"
+            @click="darkThemeState = !darkThemeState"
+          >
+            <span class="dark-mode-toggle__slider"></span>
+          </button>
+          <font-awesome-icon class="dark-mode-toggle__on-icon" :icon="['fas', 'moon']" />
+        </div>
+      </template>
+    </TheHeader>
   </header>
 
   <main class="body">
-    <TheBody :rawData="rawData" />
+    <TheBody :raw-data="rawData" />
   </main>
 </template>
 
@@ -79,41 +106,19 @@ const rawData = {
 <style scoped>
 .header {
   height: 100px;
-  line-height: 1.5;
+  line-height: 100px;
 
   flex: 0 0 auto;
 
   background: var(--c-bg-mute);
+  color: var(--c-heading);
   display: flex;
   flex-flow: row;
-  gap: 20px;
+  gap: 30px;
+  padding: 0 30px;
 }
-
 .body {
   flex: 1 0 auto;
   padding: 40px;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
 }
 </style>

@@ -2,7 +2,7 @@
 :root {
   --vt-c-white: #ffffff;
   --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
+  --vt-c-white-mute: #cbcaca;
 
   --vt-c-black: #181818;
   --vt-c-black-soft: #222222;
@@ -17,39 +17,35 @@
 
   --vt-c-text-light-1: var(--vt-c-indigo);
   --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+  --c-text: rgba(235, 235, 235, 0.64);
 
   --c-bg-card-header: rgba(84, 84, 84, 0.65);
+
+  --c-green-light: rgb(73, 175, 92);
+  --c-green-dark: rgb(28, 101, 42);
 }
 
 /* semantic color variables for this project */
-:root #app:not(.dark) {
+:root body:not(.dark-mode) {
   --c-bg: var(--vt-c-white);
   --c-bg-soft: var(--vt-c-white-soft);
   --c-bg-mute: var(--vt-c-white-mute);
 
+  --c-border: var(--vt-c-divider-dark-2);
+  --c-border-hover: var(--vt-c-divider-dark-1);
+
+  --c-heading: var(--vt-c-text-light-1);
+}
+
+:root body.dark-mode {
+  --c-bg: var(--vt-c-black);
+  --c-bg-soft: var(--vt-c-black-soft);
+  --c-bg-mute: var(--vt-c-black-mute);
+
   --c-border: var(--vt-c-divider-light-2);
   --c-border-hover: var(--vt-c-divider-light-1);
 
-  --c-heading: var(--vt-c-text-light-1);
-  --c-text: var(--vt-c-text-light-1);
-
-  --section-gap: 160px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root #app:not(.light) {
-    --c-bg: var(--vt-c-black);
-    --c-bg-soft: var(--vt-c-black-soft);
-    --c-bg-mute: var(--vt-c-black-mute);
-
-    --c-border: var(--vt-c-divider-dark-2);
-    --c-border-hover: var(--vt-c-divider-dark-1);
-
-    --c-heading: var(--vt-c-text-dark-1);
-    --c-text: var(--vt-c-text-dark-2);
-  }
+  --c-heading: var(--vt-c-text-dark-1);
 }
 
 body {

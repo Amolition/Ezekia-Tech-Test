@@ -8,9 +8,9 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 /* import font awesome icon component */
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 /* import specific icons */
-import { faLandmark } from '@fortawesome/free-solid-svg-icons'
+import { faLandmark, faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
 
 /* add icons to the library */
-library.add(faLandmark)
+library.add(faLandmark, faSun, faMoon)
 
 createApp(App).component('font-awesome-icon', FontAwesomeIcon).mount('#app')

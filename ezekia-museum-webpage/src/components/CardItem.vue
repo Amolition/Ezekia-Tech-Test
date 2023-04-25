@@ -17,9 +17,13 @@
 <style lang="scss" scoped>
 .card {
   border-radius: 20px;
+  border: solid 3px var(--c-border);
   width: 300px;
   height: 300px;
   overflow: hidden;
+  color: var(--c-text);
+  transition: transform 0.2s;
+  cursor: pointer;
   &__image {
     overflow: hidden;
     position: absolute;
@@ -31,13 +35,15 @@
     flex-flow: column;
     flex: 1;
     position: absolute;
+    width: 100%;
   }
   &__heading {
     display: flex;
     flex-flow: row;
     align-items: center;
     background: var(--c-bg-card-header);
-    opacity: 0.7;
+    opacity: 1;
+    font-size: 1.25rem;
 
     padding: 0 20px;
     width: 100%;
@@ -46,66 +52,8 @@
   &__details {
     padding: 0 20px;
   }
-}
-
-i {
-  display: flex;
-  place-items: center;
-  place-content: center;
-  width: 32px;
-  height: 32px;
-
-  color: var(--c-text);
-}
-
-h3 {
-  font-size: 1.2rem;
-  font-weight: 500;
-  margin-bottom: 0.4rem;
-  color: var(--c-heading);
-}
-
-@media (min-width: 1024px) {
-  .item {
-    margin-top: 0;
-    padding: 0.4rem 0 1rem calc(var(--section-gap) / 2);
-  }
-
-  i {
-    top: calc(50% - 25px);
-    left: -26px;
-    position: absolute;
-    border: 1px solid var(--c-border);
-    background: var(--c-bg);
-    border-radius: 8px;
-    width: 50px;
-    height: 50px;
-  }
-
-  .item:before {
-    content: ' ';
-    border-left: 1px solid var(--c-border);
-    position: absolute;
-    left: 0;
-    bottom: calc(50% + 25px);
-    height: calc(50% - 25px);
-  }
-
-  .item:after {
-    content: ' ';
-    border-left: 1px solid var(--c-border);
-    position: absolute;
-    left: 0;
-    top: calc(50% + 25px);
-    height: calc(50% - 25px);
-  }
-
-  .item:first-of-type:before {
-    display: none;
-  }
-
-  .item:last-of-type:after {
-    display: none;
+  &:hover {
+    transform: scale(1.1);
   }
 }
 </style>
