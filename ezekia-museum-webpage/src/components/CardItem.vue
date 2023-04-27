@@ -5,7 +5,12 @@
     </div>
     <div class="card__info">
       <h3 class="card__heading">
-        <slot name="heading"></slot>
+        <span class="card__heading-title">
+          <slot name="heading"></slot>
+        </span>
+        <div class="card__icon">
+          <slot name="icon"></slot>
+        </div>
       </h3>
       <p class="card__details">
         <slot name="details"></slot>
@@ -29,6 +34,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
+    transition: filter 0.2s;
   }
   &__info {
     display: flex;
@@ -41,6 +47,7 @@
     display: flex;
     flex-flow: row;
     align-items: center;
+    justify-content: space-between;
     background: var(--c-bg-card-header);
     opacity: 1;
     font-size: 1.25rem;
@@ -49,11 +56,25 @@
     width: 100%;
     height: 50px;
   }
+  &__heading-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   &__details {
     padding: 0 20px;
+    padding-top: 10px;
+    opacity: 0;
+    transition: opacity 0.2s;
   }
   &:hover {
     transform: scale(1.1);
+    .card__image {
+      filter: brightness(30%);
+    }
+    .card__details {
+      opacity: 1;
+    }
   }
 }
 </style>

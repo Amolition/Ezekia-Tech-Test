@@ -103,7 +103,7 @@ watchEffect(() => setDarkTheme(darkThemeState.value))
 }
 </style>
 
-<style scoped>
+<style lang="scss" scoped>
 .header {
   height: 100px;
   line-height: 100px;
@@ -120,5 +120,66 @@ watchEffect(() => setDarkTheme(darkThemeState.value))
 .body {
   flex: 1 0 auto;
   padding: 40px;
+}
+
+.dark-mode-toggle-container {
+  margin: auto 0;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  .dark-mode-toggle {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    border: none;
+    background: none;
+    &__slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: 0.4s;
+      transition: 0.4s;
+      border-radius: 34px;
+      &:before {
+        position: absolute;
+        content: '';
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+    }
+    &__on-icon,
+    &__off-icon {
+      width: 20px;
+      height: 20px;
+    }
+    &--off {
+      .dark-mode-toggle__slider {
+        background-color: var(--c-green-dark);
+      }
+    }
+    &--on {
+      .dark-mode-toggle__slider {
+        background-color: var(--c-green-light);
+        &:before {
+          -webkit-transform: translateX(26px);
+          -ms-transform: translateX(26px);
+          transform: translateX(26px);
+        }
+      }
+    }
+  }
 }
 </style>

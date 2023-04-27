@@ -23,6 +23,12 @@
 
   --c-green-light: rgb(73, 175, 92);
   --c-green-dark: rgb(28, 101, 42);
+
+  --c-red-light: rgb(213, 139, 139);
+  --c-red-dark: rgb(90, 33, 26);
+
+  --c-blue-light: rgb(105, 195, 255);
+  --c-blue-dark: rgb(16, 40, 56);
 }
 
 /* semantic color variables for this project */
