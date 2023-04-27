@@ -10,6 +10,7 @@ defineProps<{
   </div>
   <h1 class="main-title">Natural History Museum</h1>
   <div class="divider-line"></div>
+  <!-- ideally would pass title in as prop -->
   <h2 class="sub-title">Space</h2>
   <slot name="darkThemeToggle"></slot>
 </template>

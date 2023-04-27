@@ -1,4 +1,4 @@
-/* color palette from <https://github.com/vuejs/theme> */
+/* color palette from <https://github.com/vuejs/theme> (edited) */
 :root {
   --vt-c-white: #ffffff;
   --vt-c-white-soft: #f8f8f8;
@@ -19,7 +19,8 @@
   --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
   --c-text: rgba(235, 235, 235, 0.64);
 
-  --c-bg-card-header: rgba(84, 84, 84, 0.65);
+  --c-bg-card-header-highlight: rgba(84, 84, 84, 0.65);
+  --c-bg-card-header-partner: rgba(73, 175, 92, 0.65);
 
   --c-green-light: rgb(73, 175, 92);
   --c-green-dark: rgb(28, 101, 42);
@@ -33,16 +34,15 @@
 
 /* semantic color variables for this project */
 :root body:not(.dark-mode) {
-  --c-bg: var(--vt-c-white);
+  --c-bg: var(--vt-c-white-mute);
   --c-bg-soft: var(--vt-c-white-soft);
-  --c-bg-mute: var(--vt-c-white-mute);
+  --c-bg-mute: var(--vt-c-white);
 
   --c-border: var(--vt-c-divider-dark-2);
   --c-border-hover: var(--vt-c-divider-dark-1);
 
   --c-heading: var(--vt-c-text-light-1);
 }
-
 :root body.dark-mode {
   --c-bg: var(--vt-c-black);
   --c-bg-soft: var(--vt-c-black-soft);
@@ -53,12 +53,10 @@
 
   --c-heading: var(--vt-c-text-dark-1);
 }
-
 body {
   width: 100vw;
   height: 100vh;
 }
-
 *,
 *::before,
 *::after {

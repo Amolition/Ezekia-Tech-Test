@@ -2,9 +2,9 @@
 import { ref, watchEffect } from 'vue'
 import TheHeader from './components/TheHeader.vue'
 import TheBody from './components/TheBody.vue'
-
 import images from './assets/images/images'
 
+// data that could be received from server
 const rawData = {
   spaceHighlights: [
     {
@@ -58,15 +58,14 @@ const rawData = {
   },
 } as const
 
+// dark mode logic
 const isClientDarkMode = () => {
   return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
 }
-
 const setDarkTheme = (bool: boolean) => {
   if (bool) document.body.classList.add('dark-mode')
   else document.body.classList.remove('dark-mode')
 }
-
 const darkThemeState = ref(isClientDarkMode())
 watchEffect(() => setDarkTheme(darkThemeState.value))
 </script>
@@ -89,7 +88,6 @@ watchEffect(() => setDarkTheme(darkThemeState.value))
       </template>
     </TheHeader>
   </header>
-
   <main class="body">
     <TheBody :raw-data="rawData" />
   </main>
@@ -107,9 +105,7 @@ watchEffect(() => setDarkTheme(darkThemeState.value))
 .header {
   height: 100px;
   line-height: 100px;
-
   flex: 0 0 auto;
-
   background: var(--c-bg-mute);
   color: var(--c-heading);
   display: flex;
@@ -121,7 +117,6 @@ watchEffect(() => setDarkTheme(darkThemeState.value))
   flex: 1 0 auto;
   padding: 40px;
 }
-
 .dark-mode-toggle-container {
   margin: auto 0;
   margin-left: auto;

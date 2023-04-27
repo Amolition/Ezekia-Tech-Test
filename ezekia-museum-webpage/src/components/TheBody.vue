@@ -2,13 +2,11 @@
 import { reactive, toRefs, onBeforeMount, type DeepReadonly } from 'vue'
 import CardItem from './CardItem.vue'
 
-let pageTitle = 'space'
-
+// type definitions
 type newsType = DeepReadonly<{
   date?: string
   title: string
 }>
-
 type rawDataType = DeepReadonly<
   {
     [key in `${typeof pageTitle}Highlights`]: {
@@ -31,15 +29,18 @@ type rawDataType = DeepReadonly<
     }
   }
 >
+type highlightsAttrs = Exclude<keyof (typeof rawData.value.spaceHighlights)[number], 'id'>
+type partnersAttrs = keyof (typeof rawData.value.spacePartners)[string]
 
+// ideally would pass this in as prop
+let pageTitle = 'space'
 const props = defineProps<{
   rawData: rawDataType
 }>()
-
 const { rawData } = toRefs(props)
 
+// icon logic
 let icon: { type: string; content: string } | undefined
-
 switch (pageTitle) {
   case 'space':
     icon = {
@@ -51,25 +52,24 @@ switch (pageTitle) {
     // not implemented
     break
   case 'wildlife':
-    //not implemented
+    // not implemented
     break
 }
 
-type highlightsAttrs = Exclude<keyof (typeof rawData.value.spaceHighlights)[number], 'id'>
-type partnersAttrs = keyof (typeof rawData.value.spacePartners)[string]
-
+// get value logic
 const getHighlightValue = (id: number, attribute: highlightsAttrs) => {
   return rawData.value.spaceHighlights.find((x) => x.id === id)?.[attribute]
 }
 const getPartnerValue = (id: string, attribute: partnersAttrs) => {
   return rawData.value.spacePartners[id][attribute as partnersAttrs]
 }
-
 const getValue = (id: number | string, attribute: highlightsAttrs | partnersAttrs) => {
   if (typeof id === 'number') return getHighlightValue(id, attribute as highlightsAttrs)
   else return getPartnerValue(id, attribute as partnersAttrs)
 }
 
+// logic to control display order
+// could include UI button to re-order in future but not implemented currently
 let displayOrder: (number | string)[] = reactive([
   ...rawData.value.spaceHighlights.map((obj) => obj.id),
   ...(Object.keys(rawData.value.spacePartners) as (keyof typeof rawData.value.spacePartners)[]),
@@ -84,11 +84,9 @@ const reorderCards = (method: 'date', direction: 'asc' | 'desc'): (number | stri
       else if (Date.parse(aDate) < Date.parse(bDate)) return direction === 'asc' ? -1 : 1
       else return 0
     })
-    console.log(displayOrder)
   }
   return displayOrder
 }
-
 onBeforeMount(() => {
   reorderCards('date', 'asc')
 })
@@ -96,7 +94,7 @@ onBeforeMount(() => {
 
 <template>
   <ol class="card-list">
-    <CardItem v-for="id in displayOrder" :key="id">
+    <CardItem v-for="id in displayOrder" :key="id" :is-partner="typeof id === 'string'">
       <template #image>
         <img class="standard-image" :src="getValue(id, 'image') as (string | undefined)" />
       </template>

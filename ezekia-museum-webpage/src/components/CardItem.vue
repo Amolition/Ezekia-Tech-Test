@@ -1,5 +1,11 @@
+<script setup lang="ts">
+defineProps<{
+  isPartner: boolean
+}>()
+</script>
+
 <template>
-  <li class="card">
+  <li class="card" :class="isPartner ? 'card__partner' : 'card__highlight'">
     <div class="card__image">
       <slot name="image"></slot>
     </div>
@@ -29,6 +35,23 @@
   color: var(--c-text);
   transition: transform 0.2s;
   cursor: pointer;
+  &__highlight {
+    .card__heading {
+      background: var(--c-bg-card-header-highlight);
+    }
+  }
+  &__partner {
+    .card__heading {
+      background: var(--c-bg-card-header-partner);
+    }
+    &:after {
+      content: '#partner';
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      font-size: 0.8rem;
+    }
+  }
   &__image {
     overflow: hidden;
     position: absolute;
@@ -48,7 +71,6 @@
     flex-flow: row;
     align-items: center;
     justify-content: space-between;
-    background: var(--c-bg-card-header);
     opacity: 1;
     font-size: 1.25rem;
 
@@ -60,6 +82,9 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+  &__icon {
+    margin-left: 10px;
   }
   &__details {
     padding: 0 20px;
